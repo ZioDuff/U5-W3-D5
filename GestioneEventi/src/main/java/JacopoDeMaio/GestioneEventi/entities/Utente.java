@@ -1,6 +1,8 @@
 package JacopoDeMaio.GestioneEventi.entities;
 
 import JacopoDeMaio.GestioneEventi.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,6 +19,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @ToString
+@JsonIgnoreProperties({"password", "authorities", "accountNonExpired", "enabled", "accountNonLocked", "credentialsNonExpired"})
 public class Utente implements UserDetails {
     @Id
     @GeneratedValue
@@ -35,6 +38,10 @@ public class Utente implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role ruolo;
+
+    @OneToMany(mappedBy = "utente")
+    @JsonIgnore
+    private List<Prenotazione> prenotazioni;
 
     public Utente(String nome, String cognome, String username, String email, String password) {
         this.nome = nome;

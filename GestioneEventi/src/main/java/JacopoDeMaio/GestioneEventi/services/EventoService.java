@@ -44,11 +44,17 @@ public class EventoService {
 
     }
 
-    public Page<Evento> getUtentiList(int page, int size, String sortedBy){
+    public Page<Evento> getEventiList(int page, int size, String sortedBy){
         if (size > 20) size= 20;
         Pageable pageable = PageRequest.of(page,size, Sort.by(sortedBy));
         return eventoRepository.findAll(pageable);
     }
+
+
+    public Evento findById(UUID eventoId){
+        return eventoRepository.findById(eventoId).orElseThrow(()-> new NotFoundException(eventoId));
+    }
+
 
     public Evento findByIdAndUpdate(UUID eventoId, EventoDTO payload){
         Evento found = eventoRepository.findById(eventoId).orElseThrow(()-> new NotFoundException(eventoId));

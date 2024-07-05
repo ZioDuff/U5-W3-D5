@@ -1,5 +1,6 @@
 package JacopoDeMaio.GestioneEventi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -36,6 +38,10 @@ public class Evento  {
     @ManyToOne
     @JoinColumn(name = "organizzatore_id")
     private Utente utente;
+
+    @OneToMany(mappedBy = "evento")
+    @JsonIgnore
+    private List<Prenotazione> prenotazioni;
 
     public Evento(String titolo, String descrizione, LocalDate dataEvento, String luogo, int maxPartecipanti, Utente utente) {
         this.titolo = titolo;

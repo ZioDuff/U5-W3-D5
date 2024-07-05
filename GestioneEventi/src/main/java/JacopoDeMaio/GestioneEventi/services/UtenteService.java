@@ -1,5 +1,6 @@
 package JacopoDeMaio.GestioneEventi.services;
 
+import JacopoDeMaio.GestioneEventi.entities.Evento;
 import JacopoDeMaio.GestioneEventi.entities.Utente;
 import JacopoDeMaio.GestioneEventi.exceptions.BadRequestException;
 import JacopoDeMaio.GestioneEventi.exceptions.NotFoundException;
@@ -14,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
-import java.io.IOException;
 import java.util.UUID;
 
 @Service
@@ -25,6 +25,8 @@ public class UtenteService {
 
     @Autowired
     private PasswordEncoder bcrypt;
+
+
 
 
     //    metodo per salvare l'utente
@@ -80,4 +82,5 @@ public class UtenteService {
     public Utente findByEmail(String email){
         return  utenteRepository.findByEmail(email).orElseThrow(()-> new NotFoundException("l'utente con email: " + email + " non è stato trovato"));
     }
+
 }
