@@ -35,9 +35,6 @@ public class EventoService {
 
         Utente found = utenteService.findUtenteById(payload.utenteId());
 
-        if (found.getRuolo() != Role.ORGANIZZATORE){
-            throw new BadRequestException("Solo l'organizzatore puo creare l'evento");
-        }
 
         Evento evento = new Evento(payload.titolo(), payload.descrizione(), payload.dataEvento(), payload.luogo(), payload.maxPartecipanti(), found );
 

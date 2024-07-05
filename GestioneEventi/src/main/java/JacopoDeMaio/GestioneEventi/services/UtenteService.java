@@ -38,7 +38,7 @@ public class UtenteService {
             throw  new BadRequestException("Attenzione! l'username: "+ payload.username() + " è gia in uso");
         });
 
-        Utente utente = new Utente(payload.nome(), payload.cognome(), payload.username(), payload.email(), payload.password());
+        Utente utente = new Utente(payload.nome(), payload.cognome(), payload.username(), payload.email(), bcrypt.encode(payload.password()));
 
         Utente saved = utenteRepository.save(utente);
 

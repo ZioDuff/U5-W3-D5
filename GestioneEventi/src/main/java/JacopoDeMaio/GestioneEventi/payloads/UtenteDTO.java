@@ -21,9 +21,8 @@ public record UtenteDTO(
         String email,
         @NotEmpty(message = "Il campo password è obbligatorio")
         @Size(min = 8,max = 16,message = "La password deve essere compresa tra gli 8 e i 16 caratteri")
-        String password,
-        @NotNull
-        Role ruolo
+        String password
+
 
 ) {
 }
